@@ -267,12 +267,11 @@ function LoadWork() {
 	{
 
 		const mtlLoader = new MTLLoader();
-		// mtlLoader.load( '../models/windmill/windmill.mtl', ( mtl ) => {
-		// 	mtl.preload();
-        //     mtl.materials.Material.side = THREE.DoubleSide;
-		const objLoader = new OBJLoader();
-		// objLoader.setMaterials( mtl );
-		objLoader.load( '../models/mijonir/mijonir.obj', ( root ) => {
+		mtlLoader.load( '../models/mijonir/mijonir.mtl', ( mtl ) => {
+			mtl.preload();
+			const objLoader = new OBJLoader();
+			objLoader.setMaterials( mtl );
+			objLoader.load( '../models/mijonir/mijonir.obj', ( root ) => {
 
 			scene.add( root );
 				// compute the box that contains all the stuff
@@ -311,6 +310,7 @@ function LoadWork() {
 				controls.maxDistance = boxSize * 10;
 				controls.target.copy(boxCenter);
 				controls.update();
+			} );
 		} );
 	}
 

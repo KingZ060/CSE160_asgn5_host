@@ -267,7 +267,7 @@ function LoadWork() {
 			const objLoader = new OBJLoader();
 			objLoader.setMaterials( mtl );
 			objLoader.load( '../models/mijonir/mijonir.obj', ( root ) => {
-				root.position.set(-1, 0, 0);
+				root.position.set(-1, 0.1, 0);
 				scene.add( root );
 				// compute the box that contains all the stuff
 				// from root and below
@@ -436,8 +436,8 @@ function LoadWork() {
 				scene.add( cube6 );
 			}
 		}
-		makeRocks(-15,1,-1, 1);
-		makeRocks(15,1,-1, 2);
+		makeRocks(-15,1.1,-1, 1);
+		makeRocks(15,1.1,-1, 2);
 	}
 
 	const spheres = []; // just an array we can use to rotate the cubes
@@ -477,20 +477,45 @@ function LoadWork() {
 		const material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 
 		const cylinder = new THREE.Mesh(geometry, material);
-		cylinder.position.set(5,5,5);
+		cylinder.position.set(5,5.1,5);
 		scene.add(cylinder);
 
 		const cylinder2 = new THREE.Mesh(geometry, material);
-		cylinder2.position.set(-5,5,5);
+		cylinder2.position.set(-5,5.1,5);
 		scene.add(cylinder2);
 
 		const cylinder3 = new THREE.Mesh(geometry, material);
-		cylinder3.position.set(5,5,-7.5);
+		cylinder3.position.set(5,5.1,-7.5);
 		scene.add(cylinder3);
 
 		const cylinder4 = new THREE.Mesh(geometry, material);
-		cylinder4.position.set(-5,5,-7.5);
+		cylinder4.position.set(-5,5.1,-7.5);
 		scene.add(cylinder4);
+	}
+
+	{
+		//Idea from https://medium.com/nerd-for-tech/adding-a-custom-star-field-background-with-three-js-79a1d18fd35d
+		const getRandomParticelPos = (particleCount) => {
+			const arr = new Float32Array(particleCount * 3);
+			for (let i = 0; i < particleCount; i++) {
+			  arr[i * 3] = (Math.random() - 0.5) * 40;
+			  arr[i * 3 + 1] = Math.random() * 10 + 1;
+			  arr[i * 3 + 2] = (Math.random() - 0.5) * 40;
+			}
+			return arr;
+		  };
+
+		const geometry = new THREE.BufferGeometry();
+		const noOfPoints = 1500;
+		geometry.setAttribute(
+			"position",
+			new THREE.BufferAttribute(getRandomParticelPos(noOfPoints), 3)
+		);
+		const material = new THREE.PointsMaterial({
+			size: 0.1
+		});
+		const cube = new THREE.Points(geometry, material);
+		scene.add(cube);
 	}
 
 	class ColorGUIHelper {

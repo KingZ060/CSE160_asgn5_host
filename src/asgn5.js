@@ -213,12 +213,12 @@ function LoadWork() {
 	  });
     renderer.setSize( window.innerWidth, window.innerHeight );
 
-	const fov = 45;
+	const fov = 90;
 	const aspect = 2; // the canvas default
 	const near = 0.1;
 	const far = 100;
 	const camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
-	camera.position.set( 0, 10, 20 );
+	camera.position.set( -10, 10, 20 );
 
 	const controls = new OrbitControls( camera, canvas );
 	controls.target.set( 0, 5, 0 );
@@ -338,20 +338,28 @@ function LoadWork() {
 			scene.add(cube2);
 
 			const cube3 = new THREE.Mesh(geometry, materials);
-			cube3.position.set(-5,11,5);
+			cube3.position.set(0.5,7,7);
 			scene.add(cube3);
 
 			const cube4 = new THREE.Mesh(geometry, materials);
-			cube4.position.set(-5,11,-8);
+			cube4.position.set(0.5,7,-7);
 			scene.add(cube4);
 
 			const cube5 = new THREE.Mesh(geometry, materials);
-			cube5.position.set(5,11,5);
+			cube5.position.set(-5,11,5);
 			scene.add(cube5);
 
 			const cube6 = new THREE.Mesh(geometry, materials);
-			cube6.position.set(5,11,-8);
+			cube6.position.set(-5,11,-8);
 			scene.add(cube6);
+
+			const cube7 = new THREE.Mesh(geometry, materials);
+			cube7.position.set(5,11,5);
+			scene.add(cube7);
+
+			const cube8 = new THREE.Mesh(geometry, materials);
+			cube8.position.set(5,11,-8);
+			scene.add(cube8);
 
 			cubes.push(cube);  // add to our list of cubes to rotate
 			cubes.push(cube2);
@@ -359,6 +367,9 @@ function LoadWork() {
 			cubes.push(cube4);
 			cubes.push(cube5);
 			cubes.push(cube6);
+			cubes.push(cube7);
+			cubes.push(cube8);
+
 		};
 		
 		function loadColorTexture( path ) {
@@ -374,97 +385,88 @@ function LoadWork() {
 		} );
 
 		function makeRocks(x,y,z, direction){
+		
+			const cube1 = new THREE.Mesh( geometry, material );
+			cube1.scale.set(2,2,2);
+			const cube2 = new THREE.Mesh( geometry, material );
+			cube2.scale.set(2,2,2);
+			const cube3 = new THREE.Mesh( geometry, material );
+			cube3.scale.set(2,2,2);
+			const cube4 = new THREE.Mesh( geometry, material );
+			cube4.scale.set(2,2,2);
+			const cube5 = new THREE.Mesh( geometry, material );
+			cube5.scale.set(2,2,2);
+			const cube6 = new THREE.Mesh( geometry, material );
+			cube6.scale.set(2,2,2);
+
 			if(direction == 1){
-				const cube1 = new THREE.Mesh( geometry, material );
-				cube1.scale.set(2,2,2);
 				cube1.position.set(x,y,z);
-				scene.add( cube1 );
-
-				const cube2 = new THREE.Mesh( geometry, material );
-				cube2.scale.set(2,2,2);
 				cube2.position.set(x+5,y,z);
-				scene.add( cube2 );
-
-				const cube3 = new THREE.Mesh( geometry, material );
-				cube3.scale.set(2,2,2);
 				cube3.position.set(x+5,y+2,z);
-				scene.add( cube3 );
-
-				const cube4 = new THREE.Mesh( geometry, material );
-				cube4.scale.set(2,2,2);
 				cube4.position.set(x+10,y,z);
-				scene.add( cube4 );
-
-				const cube5 = new THREE.Mesh( geometry, material );
-				cube5.scale.set(2,2,2);
 				cube5.position.set(x+10,y+2,z);
-				scene.add( cube5 );
-
-				const cube6 = new THREE.Mesh( geometry, material );
-				cube6.scale.set(2,2,2);
 				cube6.position.set(x+10,y+4,z);
-				scene.add( cube6 );
 			}else if(direction == 2){
-				const cube1 = new THREE.Mesh( geometry, material );
-				cube1.scale.set(2,2,2);
 				cube1.position.set(x,y,z);
-				scene.add( cube1 );
-
-				const cube2 = new THREE.Mesh( geometry, material );
-				cube2.scale.set(2,2,2);
 				cube2.position.set(x-5,y,z);
-				scene.add( cube2 );
-
-				const cube3 = new THREE.Mesh( geometry, material );
-				cube3.scale.set(2,2,2);
 				cube3.position.set(x-5,y+2,z);
-				scene.add( cube3 );
-
-				const cube4 = new THREE.Mesh( geometry, material );
-				cube4.scale.set(2,2,2);
 				cube4.position.set(x-10,y,z);
-				scene.add( cube4 );
-
-				const cube5 = new THREE.Mesh( geometry, material );
-				cube5.scale.set(2,2,2);
 				cube5.position.set(x-10,y+2,z);
-				scene.add( cube5 );
-
-				const cube6 = new THREE.Mesh( geometry, material );
-				cube6.scale.set(2,2,2);
 				cube6.position.set(x-10,y+4,z);
-				scene.add( cube6 );
+			}else if(direction == 3){
+				cube1.position.set(x,y,z);
+				cube2.position.set(x,y,z+5);
+				cube3.position.set(x,y+2,z+5);
+				cube4.position.set(x,y,z+10);
+				cube5.position.set(x,y+2,z+10);
+				cube6.position.set(x,y+4,z+10);
+			}else if(direction == 4){
+				cube1.position.set(x,y,z);
+				cube2.position.set(x,y,z-5);
+				cube3.position.set(x,y+2,z-5);
+				cube4.position.set(x,y,z-10);
+				cube5.position.set(x,y+2,z-10);
+				cube6.position.set(x,y+4,z-10);
 			}
+
+			scene.add( cube1 );
+			scene.add( cube2 );
+			scene.add( cube3 );
+			scene.add( cube4 );
+			scene.add( cube5 );
+			scene.add( cube6 );
 		}
 		makeRocks(-15,1.1,-1, 1);
 		makeRocks(15,1.1,-1, 2);
+		makeRocks(0.5,1.1,-17, 3);
+		makeRocks(0.5,1.1,17, 4);
 	}
 
-	const spheres = []; // just an array we can use to rotate the cubes
-	{
-		const radius = 2;  
-		const widthSegments = 32; 
-		const heightSegments = 32; 
-		const geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+	// const spheres = []; // just an array we can use to rotate the cubes
+	// {
+	// 	const radius = 2;  
+	// 	const widthSegments = 32; 
+	// 	const heightSegments = 32; 
+	// 	const geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
 		
-		const loadManager = new THREE.LoadingManager();
-		const loader = new THREE.TextureLoader(loadManager);
-		const material = new THREE.MeshBasicMaterial({ map: loadColorTexture('../images/Empty.png') });
+	// 	const loadManager = new THREE.LoadingManager();
+	// 	const loader = new THREE.TextureLoader(loadManager);
+	// 	const material = new THREE.MeshBasicMaterial({ map: loadColorTexture('../images/Empty.png') });
 
-		loadManager.onLoad = () => {
-			const sphere = new THREE.Mesh(geometry, material);
-			sphere.position.set(0,13,0);
-			scene.add(sphere);
-			spheres.push(sphere);  // add to our list of cubes to rotate
-		};
+	// 	loadManager.onLoad = () => {
+	// 		const sphere = new THREE.Mesh(geometry, material);
+	// 		sphere.position.set(0,13,0);
+	// 		scene.add(sphere);
+	// 		spheres.push(sphere);  // add to our list of cubes to rotate
+	// 	};
 	
 		
-		function loadColorTexture( path ) {
-			const texture = loader.load( path );
-			texture.colorSpace = THREE.SRGBColorSpace;
-			return texture;
-		}
-	}
+	// 	function loadColorTexture( path ) {
+	// 		const texture = loader.load( path );
+	// 		texture.colorSpace = THREE.SRGBColorSpace;
+	// 		return texture;
+	// 	}
+	// }
 
 	{
 		const radius = 2;
@@ -474,7 +476,7 @@ function LoadWork() {
 		
 		const loadManager = new THREE.LoadingManager();
 		const loader = new THREE.TextureLoader(loadManager);
-		const material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+		const material = new THREE.MeshBasicMaterial( {color: 0x000000} );
 
 		const cylinder = new THREE.Mesh(geometry, material);
 		cylinder.position.set(5,5.1,5);
@@ -506,7 +508,7 @@ function LoadWork() {
 		  };
 
 		const geometry = new THREE.BufferGeometry();
-		const noOfPoints = 1500;
+		const noOfPoints = 150;
 		geometry.setAttribute(
 			"position",
 			new THREE.BufferAttribute(getRandomParticelPos(noOfPoints), 3)
@@ -516,6 +518,82 @@ function LoadWork() {
 		});
 		const cube = new THREE.Points(geometry, material);
 		scene.add(cube);
+	}
+
+	//Help by Chatgpt
+	const stars = createStars(50);
+	scene.add(stars);
+
+	function createStars(count) {
+		const positions = [];
+		const velocities = [];
+		for (let i = 0; i < count; i++) {
+			positions.push((Math.random() - 0.5) * 40);
+			positions.push(Math.random() * 40);
+			positions.push((Math.random() - 0.5) * 40);
+			velocities.push(0);
+			velocities.push(-Math.random() * 0.1 - 0.01);
+			velocities.push(0);
+		}
+		const geometry = new THREE.BufferGeometry();
+		geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+		const material = new THREE.PointsMaterial({size: 0.5});
+		const points = new THREE.Points(geometry, material);
+		points.velocities = velocities;
+		return points;
+	}
+
+	function updateStars(stars) {
+		const positions = stars.geometry.attributes.position.array;
+		for (let i = 0; i < positions.length; i += 3) {
+			positions[i + 1] += stars.velocities[i + 1];
+			if (positions[i + 1] < 0) {
+				positions[i + 1] = 40;
+			}
+		}
+		stars.geometry.attributes.position.needsUpdate = true;
+	}
+
+	const lightning = createLightning(10);
+	scene.add(lightning);
+
+	function createLightning(count) {
+		const group = new THREE.Group();
+		for (let i = 0; i < count; i++) {
+			const material = new THREE.LineBasicMaterial({ color: 0xffff00 });
+			const geometry = new THREE.BufferGeometry();
+			const positions = new Float32Array(6);
+			positions[0] = (Math.random() - 0.5) * 20;
+			positions[1] = 20;
+			positions[2] = (Math.random() - 0.5) * 20;
+			positions[3] = positions[0];
+			positions[4] = 0;
+			positions[5] = positions[2];
+			geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+			const line = new THREE.Line(geometry, material);
+			line.visible = false;
+			group.add(line);
+		}
+		return group;
+	}
+
+	function updateLightning(lightning) {
+		lightning.children.forEach(line => {
+			if (Math.random() > 0.98) {
+				const positions = line.geometry.attributes.position.array;
+				positions[0] = (Math.random() - 0.5) * 20;
+				positions[1] = 20;
+				positions[2] = (Math.random() - 0.5) * 20;
+				positions[3] = positions[0];
+				positions[4] = 0;
+				positions[5] = positions[2];
+				line.geometry.attributes.position.needsUpdate = true;
+				line.visible = true;
+				setTimeout(() => {
+					line.visible = false;
+				}, 1000);
+			}
+		});
 	}
 
 	class ColorGUIHelper {
@@ -675,12 +753,15 @@ function LoadWork() {
             cube.rotation.y = rot;
         });
 
-		spheres.forEach((sphere, ndx) => {
-            const speed = 1 + ndx * .1;
-            const rot = time * speed;
-            sphere.rotation.x = rot;
-            sphere.rotation.y = rot;
-        });
+		// spheres.forEach((sphere, ndx) => {
+        //     const speed = 1 + ndx * .1;
+        //     const rot = time * speed;
+        //     sphere.rotation.x = rot;
+        //     sphere.rotation.y = rot;
+        // });
+
+		updateStars(stars);
+		updateLightning(lightning);
 
 		renderer.render( scene, camera );
 
